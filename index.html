@@ -94,37 +94,100 @@
 
 
     <!-- Carousel Start -->
-    <div class="container-fluid p-0">
+<!--     <div class="container-fluid p-0">
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div style="position: relative; width: 100%; height: 40vh; overflow: hidden;">
                     <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/mVgaIC3PhuQ?autoplay=1&start=155&end=330" framework="0" allowfullscreen></iframe>   
                     </div>
-                        <!--                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h4 class="text-white text-uppercase mb-md-3">Victorious Tours & Travel</h4>
                             <h1 class="display-3 text-white mb-md-4">Welcome To Victorious Tours & Safaris</h1>
                             <a href="package.html" class="btn btn-primary py-md-3 px-md-5 mt-2">Enquire Now</a>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
-<!--             <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+            <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
                 <div class="btn btn-dark" style="width: 45px; height: 45px;">
                     <span class="carousel-control-prev-icon mb-n2"></span>
                 </div>
-            </a> -->
-<!--             <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+            </a>
+            <a class="carousel-control-next" href="#header-carousel" data-slide="next">
                 <div class="btn btn-dark" style="width: 45px; height: 45px;">
                     <span class="carousel-control-next-icon mb-n2"></span>
                 </div>
-            </a> -->
+            </a>
         </div>
-    </div>
+    </div> -->
     <!-- Carousel End -->
 
+   <div class="container-fluid p-0">
+    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div id="player"></div>
+            </div>
+        </div>
+        <button id="play-pause-btn" class="btn btn-primary">Play</button>
+    </div>
+</div>
 
+<script>
+    // Load the YouTube Iframe API
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    var player;
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '360',
+            width: '640',
+            videoId: 'mVgaIC3PhuQ',
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'loop': 1,
+                'start': 155,
+                'end': 330,
+                'modestbranding': 1, // Hide YouTube logo
+                'rel': 0, // Hide related videos at the end
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // Ready to play
+    }
+
+    function onPlayerStateChange(event) {
+        // If video is playing
+        if (event.data == YT.PlayerState.PLAYING) {
+            document.getElementById("play-pause-btn").innerText = "Pause";
+        } else {
+            document.getElementById("play-pause-btn").innerText = "Play";
+        }
+    }
+
+    function togglePlayPause() {
+        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    }
+
+    document.getElementById("play-pause-btn").addEventListener("click", togglePlayPause);
+</script>
  
 
 
