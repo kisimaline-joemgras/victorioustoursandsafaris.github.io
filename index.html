@@ -94,7 +94,7 @@
 
 
     <!-- Carousel Start -->
-<!--     <div class="container-fluid p-0">
+    <div class="container-fluid p-0">
         <div id="header-carousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -121,61 +121,8 @@
                 </div>
             </a>
         </div>
-    </div> -->
-    <!-- Carousel End -->
-    <div class="container-fluid p-0">
-    <div id="header-carousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div id="player"></div>
-            </div>
-        </div>
-        <button id="play-pause-btn" class="btn btn-primary">Play</button>
     </div>
-</div>
 
-  <script>
-    // Load the YouTube Iframe API
-    var tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    var player;
-
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            height: '40%',
-            width: '100%',
-            videoId: 'mVgaIC3PhuQ',
-            playerVars: {
-                'autoplay': 0,
-                'controls': 0,
-                'loop': 1, // Enable looping
-                'start': 155,
-                'end': 330,
-                'modestbranding': 1, // Hide YouTube logo
-                'rel': 0, // Hide related videos at the end
-            },
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-            }
-        });
-    }
-
-    function onPlayerReady(event) {
-        // Ready to play
-    }
-
-    function onPlayerStateChange(event) {
-        // If video ends, play again
-        if (event.data == YT.PlayerState.ENDED) {
-            player.seekTo(155); // Restart from the start time
-            player.playVideo();
-        }
-    }
-</script>
  
 
 
