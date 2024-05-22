@@ -124,18 +124,7 @@
     </div> -->
     <!-- Carousel End -->
 
-   <div class="container-fluid p-0">
-    <div id="header-carousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div id="player"></div>
-            </div>
-        </div>
-        <button id="play-pause-btn" class="btn btn-primary">Play</button>
-    </div>
-</div>
-
-<script>
+  <script>
     // Load the YouTube Iframe API
     var tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
@@ -152,7 +141,7 @@
             playerVars: {
                 'autoplay': 0,
                 'controls': 0,
-                'loop': 1,
+                'loop': 1, // Enable looping
                 'start': 155,
                 'end': 330,
                 'modestbranding': 1, // Hide YouTube logo
@@ -170,23 +159,12 @@
     }
 
     function onPlayerStateChange(event) {
-        // If video is playing
-        if (event.data == YT.PlayerState.PLAYING) {
-            document.getElementById("play-pause-btn").innerText = "Pause";
-        } else {
-            document.getElementById("play-pause-btn").innerText = "Play";
-        }
-    }
-
-    function togglePlayPause() {
-        if (player.getPlayerState() == YT.PlayerState.PLAYING) {
-            player.pauseVideo();
-        } else {
+        // If video ends, play again
+        if (event.data == YT.PlayerState.ENDED) {
+            player.seekTo(155); // Restart from the start time
             player.playVideo();
         }
     }
-
-    document.getElementById("play-pause-btn").addEventListener("click", togglePlayPause);
 </script>
  
 
